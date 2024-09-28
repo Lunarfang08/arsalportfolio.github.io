@@ -18,30 +18,7 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const mountRef = useRef(null); // Ref for mounting the Three.js scene
   const sceneRef = useRef(); // Ref for storing Three.js scene properties
-
-  // const [currentIndex, setCurrentIndex] = useState(0);
-  // const totalServices = 4; // Adjust if you have more services
-
-  // const slideCarousel = (direction) => {
-  //     setCurrentIndex((prevIndex) => {
-  //         let newIndex = prevIndex + direction;
-  //         if (newIndex < 0) {
-  //             return totalServices - 1; // Wrap around to last item
-  //         } else if (newIndex >= totalServices) {
-  //             return 0; // Wrap around to first item
-  //         }
-  //         return newIndex;
-  //     });
-  // };
-
-  // // Use effect for auto-slide if desired
-  // useEffect(() => {
-  //     const interval = setInterval(() => {
-  //         slideCarousel(1);
-  //     }, 3000); // Change slides every 3 seconds
-  //     return () => clearInterval(interval);
-  // }, []);
-
+  
   useEffect(() => {
     // Three.js setup
     const scene = new THREE.Scene();
@@ -53,8 +30,11 @@ const Home = () => {
     );
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement); // Append the renderer to the mountRef
-
+    
+    const mount = mountRef.current; // Store the current ref value
+  
+    mount.appendChild(renderer.domElement); // Append the renderer to the mount
+  
     // Create a sphere geometry for the ball
     const geometry = new THREE.SphereGeometry(0.5, 32, 32);
     const material = new THREE.MeshStandardMaterial({
@@ -64,55 +44,58 @@ const Home = () => {
     });
     const ball = new THREE.Mesh(geometry, material);
     scene.add(ball);
-
+  
     // Add ambient light and a directional light for better illumination
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     scene.add(ambientLight);
-
+  
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
-
+  
     camera.position.z = 5; // Move the camera back so we can see the ball
-
+  
     // Variables for movement
     let angle = 0; // Angle for smooth circular motion
     const radius = 2; // Radius of circular motion
-
+  
     const animate = function () {
       requestAnimationFrame(animate);
-
+  
       // Update the ball's position for circular motion
       ball.position.x = radius * Math.cos(angle);
       ball.position.y = radius * Math.sin(angle);
-
+  
       angle += 0.02; // Increment angle for continuous motion
-
+  
       renderer.render(scene, camera); // Render the scene
     };
-
+  
     animate(); // Start the animation
-
+  
     // Function to handle window resize
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
+  
       // Update camera aspect ratio and renderer size
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
-
+  
     window.addEventListener("resize", handleResize); // Add event listener for window resize
-
+  
     // Cleanup function to remove the Three.js canvas on component unmount
     return () => {
       window.removeEventListener("resize", handleResize); // Clean up the resize listener
-      mountRef.current.removeChild(renderer.domElement);
+      if (mount) {
+        mount.removeChild(renderer.domElement);
+      }
       renderer.dispose(); // Dispose the renderer
     };
   }, []);
+  
 
   useEffect(() => {
     const incrementCounts = (setCount, targetCount) => {
