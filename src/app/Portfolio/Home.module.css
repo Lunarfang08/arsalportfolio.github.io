@@ -1,0 +1,490 @@
+.container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 0, 150, 0.5), rgba(0, 204, 255, 0.5));
+    z-index: -1;
+    animation: backgroundAnimation 10s infinite alternate;
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    position: relative;
+    z-index: 10;
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    transition: max-height 0.3s ease;
+}
+
+.navLinks li {
+    position: relative;
+}
+
+.navLinks a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navLinks a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.header {
+    padding: 50px 20px;
+}
+
+.title {
+    font-size: 3rem; /* Use rem for better scaling */
+    color: var(--text-color);
+    animation: fadeIn 1s ease;
+}
+
+.subtitle {
+    font-size: 1.5rem; /* Use rem for better scaling */
+    margin: 20px 0;
+    color: var(--text-color);
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Stats Section */
+.stats {
+    margin-top: 50px;
+    text-align: center; /* Center text alignment */
+}
+
+.statsTitle {
+    font-size: 2.25rem; /* Adjusted for visibility */
+    color: var(--text-color);
+    margin-bottom: 30px; /* Add space below title */
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    gap: 30px; /* Space between stats */
+}
+
+.stat {
+    flex: 1; /* Equal width for each stat */
+}
+
+.statCount {
+    font-size: 4rem; /* Base font size for stat counts */
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-top: 10px;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition for transform and opacity */
+    opacity: 0; /* Start hidden */
+    transform: scale(0); /* Start small */
+}
+
+/* Animation class */
+.animateCount {
+    opacity: 1; /* Fade in */
+    transform: scale(1.2); /* Grow to 120% */
+    animation: scaleIn 0.5s forwards; /* Trigger animation */
+}
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0; /* Start transparent */
+        transform: scale(0); /* Start small */
+    }
+    100% {
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* End at original size */
+    }
+}
+
+/* Stat Label */
+.statLabel {
+    font-size: 1rem; /* Adjust font size for labels */
+    color: var(--text-color);
+    margin-top: 5px; /* Spacing above labels */
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to start for mobile */
+    }
+
+    .navLinks {
+        position: absolute;
+        top: 60px; /* Adjust based on your navbar height */
+        right: 0;
+        background-color: var(--primary-color);
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        gap: 10px;
+        transition: max-height 0.3s ease;
+        align-items: center;
+    }
+
+    .navLinks.active {
+        max-height: 300px; /* Adjust as needed */
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .title {
+        font-size: 2rem; /* Adjust for smaller screens */
+    }
+
+    .subtitle {
+        font-size: 1.2rem; /* Adjust for smaller screens */
+    }
+
+    .statsTitle {
+        font-size: 1.8rem; /* Adjust for smaller screens */
+    }
+
+    .clientCount {
+        font-size: 2.5rem; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem; /* Further adjust for extra small screens */
+    }
+
+    .subtitle {
+        font-size: 1rem; /* Further adjust for extra small screens */
+    }
+
+    .statsTitle {
+        font-size: 1.5rem; /* Further adjust for extra small screens */
+    }
+
+    .clientCount {
+        font-size: 2rem; /* Further adjust for extra small screens */
+    }
+
+    .button {
+        padding: 8px 16px; /* Adjust padding for buttons */
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.education {
+    padding: 2rem 1rem; /* Padding for spacing */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    max-width: 800px; /* Limit the max width */
+    margin: 0 auto; /* Center the section */
+}
+
+.educationText {
+    font-size: 1.2rem; /* Adjust font size */
+    color: #000000; /* Darker text color */
+    text-align: center; /* Center text */
+    margin: 0.5rem 0; /* Spacing between paragraphs */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+}
+
+.educationText:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    color: #007bff; /* Change color on hover */
+}
+
+.clients-served,
+.total-projects,
+.years-experience {
+    font-size: 4rem; /* Adjust the size as needed */
+    color: var(--text-color); /* Ensure the color matches your design */
+    font-weight: bold; /* Make the text bold for emphasis */
+    margin-top: 10px; /* Add some spacing */
+}
+
+@media (max-width: 768px) {
+    .clients-served,
+    .total-projects,
+    .years-experience {
+        font-size: 3rem; /* Adjust for medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .clients-served,
+    .total-projects,
+    .years-experience {
+        font-size: 2.5rem; /* Further adjust for extra small screens */
+    }
+}
+
+/* Remove white background from experience section */
+.experience {
+    background-color: transparent;
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  /* Title Styling */
+  .experienceTitle {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Experience Card Container */
+  .experienceCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  /* Experience Card Styling */
+  .experienceCard {
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background for the cards */
+    backdrop-filter: blur(10px); /* Apply blur for a frosted-glass effect */
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  /* Card Hover Effect */
+  .experienceCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Experience Text */
+  .experienceCard h3 {
+    font-size: 1.5rem;
+    color: #19a7ce; /* You can change this color */
+    margin-bottom: 0.5rem;
+  }
+  
+  .experienceCard p {
+    font-size: 1rem;
+    color: #000000; /* Text color inside the card */
+    line-height: 1.5;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .experienceCard {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+
+  .footer {
+    background-color: #282c34;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative; /* To allow positioning of child elements */
+    bottom: 0;
+    width: 100%;
+    animation: fadeIn 1s; /* Optional fade-in animation */
+  }
+  
+  .footerContent {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+
+  .footer p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  
+  .socialLinks {
+    margin-top: 10px;
+  }
+  
+  .socialLinks a {
+    color: #61dafb;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+  
+  .socialLinks a:hover {
+    color: #21a1f1; /* Change color on hover */
+  }
+  
+  /* Keyframe animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-10px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .trainingSection {
+    padding: 4rem 0;
+    /* background: linear-gradient(to bottom right, #f0f8ff, #add8e6); */
+    text-align: center;
+  }
+  
+  .trainingTitle {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .trainingList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .trainingItem {
+    font-size: 1.2rem;
+    color: #444;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .trainingItem:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+  
+
+  .uniqueServicesSection {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: rgb(0 0 0 / 0.1);
+  }
+  
+  .uniqueServicesTitle {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333; /* Dark text */
+  }
+  
+  .uniqueCardContainer {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Space between cards */
+  }
+  
+  .uniqueServiceCard {
+    background: #fff; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Clip overflow */
+    transition: transform 0.3s ease; /* Smooth transform */
+    width: 300px; /* Fixed width for cards */
+    max-width: 100%; /* Responsive max width */
+  }
+  
+  .uniqueServiceImage {
+    width: 100%; /* Full width of the card */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Cover image */
+  }
+  
+  .uniqueServiceTitle {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    color: #555; /* Slightly lighter text */
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+  
+  /* Optional hover effect on the card title */
+  .uniqueServiceCard:hover .uniqueServiceTitle {
+    color: #007bff; /* Change color on hover */
+  }
+    /* -------------------------------------------------------- */
+
+    
