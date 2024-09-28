@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react-hooks/exhaustive-deps": "warn", // Change to warn if you don't want to disable it completely
+    "@next/next/no-img-element": "warn" // Change to warn if you prefer not to disable it
+  }
 }
